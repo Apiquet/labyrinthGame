@@ -12,7 +12,12 @@ fond = pygame.image.load("images/background.jpg").convert()
 #adaptation of the image size to the window
 fenetre.blit(pygame.transform.scale(fond, (640, 480)), (0, 0))
 
-#display background
+#player's image
+player_image = pygame.image.load("images/worm.jpg").convert()
+#adaptation of the image size to the window
+fenetre.blit(pygame.transform.scale(player_image, (50, 50)), (0, 0))
+
+#Refresh the display
 pygame.display.flip()
 
 
