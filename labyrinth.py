@@ -56,9 +56,48 @@ while continuer:
 				#move player position if he doesn't go outside the window
 				if player_pos[0]+player_size[0]< screen_size[0]-player_size[0]:
 					player_pos=(player_pos[0]+player_size[0], player_pos[1])
+				else:
+					player_pos=(screen_size[0]-player_size[0], player_pos[1])
 				#redisplay background to remove previous player's image
 				screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
 				#display player's image on the new position
 				screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
 				#refresh display
 				pygame.display.flip()
+			if event.key == K_LEFT: #LEFT
+				#move player position if he doesn't go outside the window
+				if player_pos[0]-player_size[0]> 0:
+					player_pos=(player_pos[0]-player_size[0], player_pos[1])
+				else:
+					player_pos=(0, player_pos[1])				
+				#redisplay background to remove previous player's image
+				screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
+				#display player's image on the new position
+				screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
+				#refresh display
+				pygame.display.flip()
+			if event.key == K_DOWN: #DOWN
+				#move player position if he doesn't go outside the window
+				if player_pos[1]+player_size[1]< screen_size[1]-player_size[1]:
+					player_pos=(player_pos[0], player_pos[1]+player_size[1])
+				else:
+					player_pos=(player_pos[0], screen_size[1]-player_size[1])
+				#redisplay background to remove previous player's image
+				screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
+				#display player's image on the new position
+				screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
+				#refresh display
+				pygame.display.flip()
+			if event.key == K_UP: #UP
+				#move player position if he doesn't go outside the window
+				if player_pos[1]-player_size[1]> 0:
+					player_pos=(player_pos[0], player_pos[1]-player_size[1])
+				else:
+					player_pos=(player_pos[0], 0)				
+				#redisplay background to remove previous player's image
+				screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
+				#display player's image on the new position
+				screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
+				#refresh display
+				pygame.display.flip()
+
