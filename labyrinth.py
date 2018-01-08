@@ -30,3 +30,7 @@ while continuer:
 	for event in pygame.event.get():   #verify events
 		if event.type == QUIT:     #if user want to QUIT
 			continuer = 0      #Stop the loop
+		if event.type == VIDEORESIZE:
+			screen = pygame.display.set_mode((event.w, event.h), RESIZABLE)
+			screen.blit(pygame.transform.scale(background, (event.w, event.h)), (0, 0))
+			pygame.display.flip()
