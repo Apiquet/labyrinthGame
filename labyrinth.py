@@ -4,10 +4,15 @@ from pygame.locals import *
 #pygame initialization
 pygame.init()
 
-#variables
+
+##########################################################################
+############################# VARIABLES ##################################
 screen_size=(640,480)
 player_image_size=(int(screen_size[0]/10),int(screen_size[1]/10))
 
+
+##########################################################################
+########################## SCREEN CREATION ###############################
 #creation of the window
 screen = pygame.display.set_mode(screen_size, RESIZABLE)
 
@@ -26,9 +31,10 @@ screen.blit(pygame.transform.scale(player_image, (int(screen_size[0]/10),int(scr
 #Refresh the display
 pygame.display.flip()
 
-
 continuer = 1
 
+##########################################################################
+################################ GAME ####################################
 #infinite loop
 while continuer:
 	for event in pygame.event.get():   #verify events
