@@ -7,10 +7,10 @@ pygame.init()
 
 ##########################################################################
 ############################# VARIABLES ##################################
-screen_size=(600,500)
+screen_size=(910,700)
 player_size_coeff=6
 player_size=(int(screen_size[0]/player_size_coeff),int(screen_size[1]/player_size_coeff))
-player_move_coeff=0.2
+player_move_coeff=0.25
 
 
 ##########################################################################
@@ -26,10 +26,13 @@ background = pygame.image.load("images/background.jpg").convert()
 player_image = pygame.image.load("images/titeuf_right.jpg").convert()
 #Nadia's image
 nadia = pygame.image.load("images/Nadia.jpg").convert()
+#Nadia and Titeuf
+nadia_titeuf = pygame.image.load("images/nadia_titeuf.png").convert()
 #ref the player's position
 player_pos=player_image.get_rect()
-pygame.key.set_repeat(1, 1)
+nadia_pos=nadia.get_rect()
 
+pygame.key.set_repeat(1, 1)
 
 continuer = 1
 
@@ -86,16 +89,23 @@ while continuer:
 
 
 	#make transparent the background of the image
-	player_image.set_colorkey((255,255,255))
-	labyrinth.set_colorkey((255,255,255))	
-	nadia.set_colorkey((255,255,255))
-	#redisplay background to remove previous player's image
+	labyrinth.set_colorkey((255,255,255))
 	screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
-
 	screen.blit(pygame.transform.scale(labyrinth, screen_size), (0, 0))
-	#display player's image on the new position
-	screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
-	screen.blit(pygame.transform.scale(nadia, player_size), (screen_size[0]-player_size[0],0))
+	
+	if (player_pos.x>screen_size[0]-player_size[0]*1.5) and (player_pos.y<nadia_pos.y + player_size[1]):
+		#make transparent backkground
+		nadia_titeuf.set_colorkey((255,255,255))
+		#display player's image on the new position
+		screen.blit(pygame.transform.scale(nadia_titeuf, player_size), (screen_size[0]-player_size[0]*1.2,0))
+	else:	
+		#make transparent backkground	
+		player_image.set_colorkey((255,255,255))		
+		nadia.set_colorkey((255,255,255))
+		#display player's image on the new position
+		screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
+		screen.blit(pygame.transform.scale(nadia, player_size), (screen_size[0]-player_size[0],0))
+		
 
 	#refresh display
 	pygame.display.flip()
