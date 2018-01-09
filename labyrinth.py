@@ -7,10 +7,10 @@ pygame.init()
 
 ##########################################################################
 ############################# VARIABLES ##################################
-screen_size=(640,480)
-player_size_coeff=7
+screen_size=(650,500)
+player_size_coeff=6
 player_size=(int(screen_size[0]/player_size_coeff),int(screen_size[1]/player_size_coeff))
-player_move_coeff=0.1
+player_move_coeff=0.2
 
 
 ##########################################################################
@@ -19,13 +19,14 @@ player_move_coeff=0.1
 screen = pygame.display.set_mode(screen_size, RESIZABLE)
 
 #background
+labyrinth = pygame.image.load("images/background2.jpg").convert()
 background = pygame.image.load("images/background.jpg").convert()
 
 #player's image
 player_image = pygame.image.load("images/titeuf_beginning.png").convert()
 #ref the player's position
 player_pos=player_image.get_rect()
-pygame.key.set_repeat(30, 30)
+pygame.key.set_repeat(1, 1)
 
 
 continuer = 1
@@ -84,8 +85,11 @@ while continuer:
 
 	#make transparent the background of the image
 	player_image.set_colorkey((255,255,255))
+	labyrinth.set_colorkey((255,255,255))
 	#redisplay background to remove previous player's image
 	screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
+
+	screen.blit(pygame.transform.scale(labyrinth, screen_size), (0, 0))
 	#display player's image on the new position
 	screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
 	#refresh display
