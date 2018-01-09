@@ -7,7 +7,7 @@ pygame.init()
 
 ##########################################################################
 ############################# VARIABLES ##################################
-screen_size=(650,500)
+screen_size=(600,500)
 player_size_coeff=6
 player_size=(int(screen_size[0]/player_size_coeff),int(screen_size[1]/player_size_coeff))
 player_move_coeff=0.2
@@ -16,14 +16,16 @@ player_move_coeff=0.2
 ##########################################################################
 ########################## SCREEN CREATION ###############################
 #creation of the window
-screen = pygame.display.set_mode(screen_size, RESIZABLE)
+screen = pygame.display.set_mode(screen_size)
 
 #background
 labyrinth = pygame.image.load("images/background2.jpg").convert()
 background = pygame.image.load("images/background.jpg").convert()
 
 #player's image
-player_image = pygame.image.load("images/titeuf_beginning.png").convert()
+player_image = pygame.image.load("images/titeuf_right.jpg").convert()
+#Nadia's image
+nadia = pygame.image.load("images/Nadia.jpg").convert()
 #ref the player's position
 player_pos=player_image.get_rect()
 pygame.key.set_repeat(1, 1)
@@ -38,11 +40,11 @@ while continuer:
 	for event in pygame.event.get():   #verify events
 		if event.type == QUIT:     #if user want to QUIT
 			continuer = 0      #Stop the loop
-		if event.type == VIDEORESIZE:	#if user resize screen
+		'''if event.type == VIDEORESIZE:	#if user resize screen
 			#update screen size
 			screen_size=(event.w, event.h)
 			player_size=(int(screen_size[0]/player_size_coeff),int(screen_size[1]/player_size_coeff))			
-			screen = pygame.display.set_mode(screen_size, RESIZABLE)
+			screen = pygame.display.set_mode(screen_size)'''
 		if event.type == KEYDOWN : #if user press a key
 			if event.key == K_RIGHT: #right
 				#move player position if he doesn't go outside the window
@@ -65,7 +67,7 @@ while continuer:
 				player_image = pygame.image.load("images/titeuf_down.gif").convert()
 				#move player position if he doesn't go outside the window
 				if player_pos.y+player_move_coeff*player_size[1]< screen_size[1]-player_size[1]:
-					player_pos=player_pos.move(0,player_move_coeff*player_size[1])
+					player_pos=player_pos.move(0,player_move_coeff*0.7*player_size[1])
 				else:
 					player_pos.y=screen_size[1]-player_size[1]
 			if event.key == K_UP: #UP
@@ -73,7 +75,7 @@ while continuer:
 				player_image = pygame.image.load("images/titeuf_up.gif").convert()
 				#move player position if he doesn't go outside the window
 				if player_pos.y-player_move_coeff*player_size[1] > 0:
-					player_pos=player_pos.move(0,-player_move_coeff*player_size[1])
+					player_pos=player_pos.move(0,-player_move_coeff*0.7*player_size[1])
 				else:
 					player_pos[1]=0
 		if event.type == MOUSEBUTTONDOWN:
@@ -85,13 +87,16 @@ while continuer:
 
 	#make transparent the background of the image
 	player_image.set_colorkey((255,255,255))
-	labyrinth.set_colorkey((255,255,255))
+	labyrinth.set_colorkey((255,255,255))	
+	nadia.set_colorkey((255,255,255))
 	#redisplay background to remove previous player's image
 	screen.blit(pygame.transform.scale(background, screen_size), (0, 0))
 
 	screen.blit(pygame.transform.scale(labyrinth, screen_size), (0, 0))
 	#display player's image on the new position
 	screen.blit(pygame.transform.scale(player_image, player_size), player_pos)
+	screen.blit(pygame.transform.scale(nadia, player_size), (screen_size[0]-player_size[0],0))
+
 	#refresh display
 	pygame.display.flip()
 
