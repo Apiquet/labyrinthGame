@@ -54,7 +54,8 @@ while continuer:
 				#player's image
 				player_image = pygame.image.load("images/titeuf_right.jpg").convert()
 				if player_pos.x+player_move_coeff*player_size[0]< screen_size[0]-player_size[0]:
-					player_pos=player_pos.move(player_move_coeff*player_size[0],0)
+					if (player_pos.y<53 and player_pos.x<432) or (player_pos.y>444):
+						player_pos=player_pos.move(player_move_coeff*player_size[0],0)
 				else:
 					player_pos.x=screen_size[0]-player_size[0]				
 			if event.key == K_LEFT: #LEFT
@@ -62,7 +63,8 @@ while continuer:
 				player_image = pygame.image.load("images/titeuf_left.jpg").convert()
 				#move player position if he doesn't go outside the window
 				if player_pos.x-player_move_coeff*player_size[0]> 0:
-					player_pos=player_pos.move(-player_move_coeff*player_size[0],0)
+					if (player_pos.y<53 and player_pos.x<462) or (player_pos.y>444):
+						player_pos=player_pos.move(-player_move_coeff*player_size[0],0)
 				else:
 					player_pos.x=0
 			if event.key == K_DOWN: #DOWN
@@ -70,7 +72,8 @@ while continuer:
 				player_image = pygame.image.load("images/titeuf_down.gif").convert()
 				#move player position if he doesn't go outside the window
 				if player_pos.y+player_move_coeff*player_size[1]< screen_size[1]-player_size[1]:
-					player_pos=player_pos.move(0,player_move_coeff*0.7*player_size[1])
+					if (player_pos.x>310 and player_pos.x<462) or player_pos.x>663:
+						player_pos=player_pos.move(0,player_move_coeff*0.7*player_size[1])
 				else:
 					player_pos.y=screen_size[1]-player_size[1]
 			if event.key == K_UP: #UP
@@ -78,14 +81,15 @@ while continuer:
 				player_image = pygame.image.load("images/titeuf_up.gif").convert()
 				#move player position if he doesn't go outside the window
 				if player_pos.y-player_move_coeff*player_size[1] > 0:
-					player_pos=player_pos.move(0,-player_move_coeff*0.7*player_size[1])
+					if (player_pos.x>310 and player_pos.x<462) or player_pos.x>663:
+						player_pos=player_pos.move(0,-player_move_coeff*0.7*player_size[1])
 				else:
 					player_pos[1]=0
 		if event.type == MOUSEBUTTONDOWN:
 			if event.button == 1:	#if left click
 				#player go to click position
-				player_pos.x = event.pos[0]
-				player_pos.y = event.pos[1]
+				print(event.pos[0])
+				print(event.pos[1])
 
 
 	#make transparent the background of the image
